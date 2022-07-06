@@ -1,0 +1,13 @@
+GAME-START
+R:S
+R:S
+R:E
+R:E
+Y:S
+Y:S
+Y:W
+Y:W
+R:E
+R:E
+Y:W
+GAME-END
