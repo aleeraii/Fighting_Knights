@@ -51,7 +51,8 @@ Here is a sample output file:
 ### Instructions to execute code:
 Follow below-mentioned steps to execute the code:
 <li> Create a .txt file named moves.txt in the sample format given above
-<li> Make sure the moves.txt file is at the same directory level as the main.py
-<li> Execute the python program by using this command <b>python main.py</b>
+<li> Make sure the moves.txt file is at the same directory level as the game.py
+<li> Execute the python program by using this command <b>python game.py</b>
 <li> You can see the results in the output file named as final_state.json
+<br><br><br><br>
 

@@ -1,6 +1,8 @@
 import unittest
-from constants import ALIVE, KILLED, KNIGHTS_MAPPING, DROWNED
-from classes import Item, Knight, Arena, Game
+from item import Item
+from arena import Arena
+from knight import Knight
+from constants import ALIVE, KILLED, KNIGHTS_MAPPING
 
 
 class TestCase(unittest.TestCase):
