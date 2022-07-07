@@ -1,4 +1,6 @@
-from constants import ALIVE
+import operator
+
+from constants import ALIVE, DROWNED, KILLED
 
 
 # Below-mentioned class is an information container for knights on the gaming board
@@ -14,3 +16,38 @@ class Knight:
         self.attack = 1
 
         position.knight = self
+
+    def die(self):
+        item = self.item
+        position = self.position
+        if item:
+            item.is_equipped = False
+            self.item = None
+            position.items.append(item)
+            item.position = position
+        position.knight = None
+        self.attack = self.defence = 0
+
+    def drown(self):
+        self.die()
+        self.position = None
+        self.status = DROWNED
+
+    def kill(self, pos):
+        self.die()
+        self.position = pos
+        self.status = KILLED
+
+    def equip(self, pos):
+        item = sorted(pos.items, key=operator.attrgetter('priority'))[-1]
+        self.item = item
+        item.is_equipped = True
+        item.position = None
+        pos.items.remove(item)
+
+    def move(self, pos):
+        self.position.knight = None
+        self.position = pos
+        pos.knight = self
+        if self.item:
+            self.item.position = self.position

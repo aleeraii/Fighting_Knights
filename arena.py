@@ -16,7 +16,7 @@ class Arena:
             self.Board.append(row)
 
     # below-mentioned method provides information about the next move the knight is going to make on the board
-    def movements(self, direction, position):
+    def get_next_position(self, direction, position):
         row = position.row
         col = position.col
         if direction == 'S':
@@ -31,54 +31,16 @@ class Arena:
             return None
         return self.Board[row][col]
 
-    # created below is a method where a knight is sent to do important changes in states of objects on board after
-    # drowning
-    @staticmethod
-    def drown_knight(knight):
-        item = knight.item
-        position = knight.position
-        if item:
-            item.is_equipped = False
-            knight.item = None
-            position.items.append(item)
-            item.position = position
-        knight.attack = knight.defence = 0
-        knight.status = DROWNED
-
-    # created below is a method where a knight is sent to do important changes in states of objects on board after
-    # being killed by some other knight
-    @staticmethod
-    def kill_knight(knight):
-        item = knight.item
-        position = knight.position
-        if item:
-            item.is_equipped = False
-            knight.item = None
-            position.items.append(item)
-        knight.status = KILLED
-        knight.attack = knight.defence = 0
-
     # below method moves the knights on the board doing necessary changes in states
     def move_knight(self, knight, direction):
-        if not knight.status == DROWNED and not knight.status == KILLED:
-            current_position = self.movements(direction, knight.position)
-            if not current_position:
-                self.drown_knight(knight)
-                knight.position = current_position
-            else:
-                if current_position.items and not knight.item:
-                    item = sorted(current_position.items, key=operator.attrgetter('priority'))[0]
-                    knight.item = item
-                    item.is_equipped = True
-                    item.position = None
-                    current_position.items.remove(item)
-                if current_position.knight and current_position.knight.status == ALIVE:
-                    winner, loser = Fight.fight(knight, current_position.knight)
-                    self.kill_knight(loser)
-                    loser.position = current_position
-                    knight = winner
-                knight.position.knight = None
-                knight.position = current_position
-                current_position.knight = knight
-                if knight.item:
-                    knight.item.position = knight.position
+        current_position = self.get_next_position(direction, knight.position)
+        if not current_position:
+            knight.drown()
+        else:
+            if current_position.items and not knight.item:
+                knight.equip(current_position)
+            if current_position.knight and current_position.knight.status == ALIVE:
+                winner, loser = Fight.fight(knight, current_position.knight)
+                loser.kill(current_position)
+                knight = winner
+            knight.move(current_position)
