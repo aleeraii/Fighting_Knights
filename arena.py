@@ -1,6 +1,4 @@
-import operator
-
-from constants import DROWNED, KILLED, ALIVE
+from constants import ALIVE
 from fight import Fight
 from position import Position
 
@@ -16,7 +14,7 @@ class Arena:
             self.Board.append(row)
 
     # below-mentioned method provides information about the next move the knight is going to make on the board
-    def get_next_position(self, direction, position):
+    def get_next_valid_position(self, direction, position):
         row = position.row
         col = position.col
         if direction == 'S':
@@ -33,14 +31,14 @@ class Arena:
 
     # below method moves the knights on the board doing necessary changes in states
     def move_knight(self, knight, direction):
-        current_position = self.get_next_position(direction, knight.position)
-        if not current_position:
+        next_valid_position = self.get_next_valid_position(direction, knight.position)
+        if not next_valid_position:
             knight.drown()
-        else:
-            if current_position.items and not knight.item:
-                knight.equip(current_position)
-            if current_position.knight and current_position.knight.status == ALIVE:
-                winner, loser = Fight.fight(knight, current_position.knight)
-                loser.kill(current_position)
-                knight = winner
-            knight.move(current_position)
+            return None
+        if next_valid_position.items and not knight.item:
+            knight.equip(next_valid_position)
+        if next_valid_position.knight and next_valid_position.knight.status == ALIVE:
+            winner, loser = Fight.fight(knight, next_valid_position.knight)
+            loser.kill(next_valid_position)
+            knight = winner
+        knight.move(next_valid_position)

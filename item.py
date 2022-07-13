@@ -12,3 +12,10 @@ class Item:
 
         position.items.append(self)
 
+    def equip(self):
+        self.is_equipped = True
+        self.position = None
+
+    def un_equip(self, position):
+        self.is_equipped = False
+        self.position = position

@@ -21,10 +21,9 @@ class Knight:
         item = self.item
         position = self.position
         if item:
-            item.is_equipped = False
             self.item = None
             position.items.append(item)
-            item.position = position
+            item.un_equip(position)
         position.knight = None
         self.attack = self.defence = 0
 
@@ -41,8 +40,7 @@ class Knight:
     def equip(self, pos):
         item = sorted(pos.items, key=operator.attrgetter('priority'))[-1]
         self.item = item
-        item.is_equipped = True
-        item.position = None
+        item.equip()
         pos.items.remove(item)
 
     def move(self, pos):
