@@ -31,6 +31,8 @@ G:S
 B:N
 B:N
 B:N
+B:N
+B:N
 B:E
 B:E
 G:W

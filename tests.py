@@ -82,6 +82,36 @@ class TestCase(unittest.TestCase):
         self.assertEqual(self.knight_g.item, None)
         self.assertEqual(self.knight_g.status, DEAD)
 
+    def test_drown(self):
+        self.arena.move_knight(self.knight_y, 'N')
+
+        self.assertEqual(self.knight_y.status, DROWNED)
+
+    def test_equip_high_priority_item(self):
+        moves = [
+            ['R', 'E'], ['R', 'E'], ['R', 'E'], ['R', 'E'], ['R', 'E'], ['R', 'S'], ['R', 'S'],
+            ['Y', 'W'], ['Y', 'W'], ['Y', 'W'], ['Y', 'W'], ['Y', 'W'], ['Y', 'S'], ['Y', 'S'],
+            ['R', 'W'], ['R', 'W'], ['R', 'W'],
+            ['G', 'N'], ['G', 'N'], ['G', 'W'], ['G', 'W'], ['G', 'N'], ['G', 'N'], ['G', 'N'], ['G', 'W'], ['G', 'W'],
+            ['G', 'W'], ['G', 'S'], ['G', 'S'],
+            ['B', 'N'], ['B', 'N'], ['B', 'N'], ['B', 'N'], ['B', 'N'], ['B', 'E'], ['B', 'E']
+        ]
+        for knight, move in moves:
+            self.arena.move_knight(getattr(self, KNIGHTS_MAPPING[knight]), move)
+
+        self.assertEqual(self.knight_b.item, self.axe)
+
+    def test_knight_defence(self):
+        moves = [
+            ['G', 'N'], ['G', 'N'], ['G', 'W'], ['G', 'W'], ['G', 'N'], ['G', 'N'],
+            ['Y', 'S'], ['Y', 'S'], ['Y', 'S'], ['Y', 'W'], ['Y', 'W'],
+        ]
+        for knight, move in moves:
+            self.arena.move_knight(getattr(self, KNIGHTS_MAPPING[knight]), move)
+
+        self.assertEqual(self.knight_y.status, DEAD)
+        self.assertEqual(self.knight_g.status, LIVE)
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

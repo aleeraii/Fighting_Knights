@@ -17,7 +17,7 @@ class Knight:
 
         position.knight = self
 
-    def die(self):
+    def _die(self):
         item = self.item
         position = self.position
         if item:
@@ -28,12 +28,12 @@ class Knight:
         self.attack = self.defence = 0
 
     def drown(self):
-        self.die()
+        self._die()
         self.position = None
         self.status = DROWNED
 
     def kill(self, pos):
-        self.die()
+        self._die()
         self.position = pos
         self.status = DEAD
 
