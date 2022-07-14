@@ -26,4 +26,4 @@ class InputOutputData:
         for item in items:
             output_moves[item.name] = [item.position.get_pos(), item.is_equipped]
         with open(output_file, 'w') as file:
-            file.write(json.dumps(output_moves))
+            file.write(json.dumps(output_moves, indent=4,))

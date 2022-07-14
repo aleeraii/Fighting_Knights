@@ -35,10 +35,13 @@ class Arena:
         if not next_valid_position:
             knight.drown()
             return None
+
         if next_valid_position.items and not knight.item:
             knight.equip(next_valid_position)
+
         if next_valid_position.knight and next_valid_position.knight.status == ALIVE:
             winner, loser = Fight.fight(knight, next_valid_position.knight)
             loser.kill(next_valid_position)
             knight = winner
+
         knight.move(next_valid_position)

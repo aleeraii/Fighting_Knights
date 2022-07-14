@@ -4,8 +4,7 @@ class Fight:
     # after fight between them
     @staticmethod
     def fight(attacker, defender):
-        attacker.attack += 0.5
-        attacker_score = attacker.attack
+        attacker_score = attacker.attack + 0.5
         defender_score = defender.defence
         if attacker.item:
             attacker_score += attacker.item.attack
