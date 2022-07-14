@@ -1,7 +1,7 @@
 from item import Item
 from arena import Arena
 from knight import Knight
-from constants import KNIGHTS_MAPPING, ALIVE
+from constants import KNIGHTS_MAPPING, LIVE
 from input_output_data import InputOutputData
 
 
@@ -27,7 +27,7 @@ class Game:
         moves = iodata.read_moves(input_moves_file)
         for knight, move in moves:
             knight = getattr(self, KNIGHTS_MAPPING[knight])
-            if knight.status == ALIVE:
+            if knight.status == LIVE:
                 self.arena.move_knight(knight, move)
 
         iodata.write_output(output_file,

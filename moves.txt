@@ -16,7 +16,6 @@ Y:S
 R:W
 R:W
 R:W
-
 G:N
 G:N
 G:W
@@ -27,7 +26,6 @@ G:N
 G:W
 G:W
 G:W
-
 G:S
 G:S
 B:N
@@ -35,4 +33,7 @@ B:N
 B:N
 B:E
 B:E
+G:W
+G:W
+G:W
 GAME-END

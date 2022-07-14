@@ -1,6 +1,6 @@
-ALIVE = 'LIVE'
+LIVE = 'LIVE'
 DROWNED = 'DROWNED'
-KILLED = 'KILLED'
+DEAD = 'DEAD'
 KNIGHTS_MAPPING = {
     'R': 'knight_r',
     'G': 'knight_g',

@@ -4,37 +4,34 @@
             2,
             2
         ],
-        "KILLED",
+        "DEAD",
         null,
         0,
         0
     ],
     "blue": [
         [
-            5,
-            2
-        ],
-        "LIVE",
-        "magic_staff",
-        2,
-        2
-    ],
-    "green": [
-        [
             4,
             2
         ],
-        "LIVE",
-        "helmet",
-        1,
-        2
+        "DEAD",
+        null,
+        0,
+        0
+    ],
+    "green": [
+        null,
+        "DROWNED",
+        null,
+        0,
+        0
     ],
     "yellow": [
         [
             2,
             2
         ],
-        "KILLED",
+        "DEAD",
         null,
         0,
         0
@@ -44,14 +41,14 @@
             5,
             2
         ],
-        true
+        false
     ],
     "helmet": [
         [
             4,
-            2
+            0
         ],
-        true
+        false
     ],
     "dagger": [
         [

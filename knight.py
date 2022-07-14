@@ -1,12 +1,12 @@
 import operator
 
-from constants import ALIVE, DROWNED, KILLED
+from constants import LIVE, DROWNED, DEAD
 
 
 # Below-mentioned class is an information container for knights on the gaming board
 class Knight:
 
-    def __init__(self, knight_id, name, position, status=ALIVE, item=None):
+    def __init__(self, knight_id, name, position, status=LIVE, item=None):
         self.id = knight_id
         self.name = name
         self.status = status
@@ -35,7 +35,7 @@ class Knight:
     def kill(self, pos):
         self.die()
         self.position = pos
-        self.status = KILLED
+        self.status = DEAD
 
     def equip(self, pos):
         item = sorted(pos.items, key=operator.attrgetter('priority'))[-1]

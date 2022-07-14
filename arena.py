@@ -1,4 +1,4 @@
-from constants import ALIVE
+from constants import LIVE
 from fight import Fight
 from position import Position
 
@@ -39,7 +39,7 @@ class Arena:
         if next_valid_position.items and not knight.item:
             knight.equip(next_valid_position)
 
-        if next_valid_position.knight and next_valid_position.knight.status == ALIVE:
+        if next_valid_position.knight and next_valid_position.knight.status == LIVE:
             winner, loser = Fight.fight(knight, next_valid_position.knight)
             loser.kill(next_valid_position)
             knight = winner

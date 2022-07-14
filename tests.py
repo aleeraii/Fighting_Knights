@@ -2,7 +2,7 @@ import unittest
 from item import Item
 from arena import Arena
 from knight import Knight
-from constants import ALIVE, KILLED, KNIGHTS_MAPPING, DROWNED
+from constants import LIVE, DEAD, KNIGHTS_MAPPING, DROWNED
 
 
 class TestCase(unittest.TestCase):
@@ -61,8 +61,8 @@ class TestCase(unittest.TestCase):
         self.arena.move_knight(self.knight_r, 'S')
 
         self.assertEqual(self.knight_y.status, DROWNED)
-        self.assertEqual(self.knight_b.status, KILLED)
-        self.assertEqual(self.knight_r.status, ALIVE)
+        self.assertEqual(self.knight_b.status, DEAD)
+        self.assertEqual(self.knight_r.status, LIVE)
 
     def test_fight(self):
         moves = [
@@ -75,12 +75,12 @@ class TestCase(unittest.TestCase):
         self.assertEqual(self.knight_r.position.row, 3)
         self.assertEqual(self.knight_r.position.col, 3)
         self.assertEqual(self.knight_r.item, self.axe)
-        self.assertEqual(self.knight_r.status, ALIVE)
+        self.assertEqual(self.knight_r.status, LIVE)
 
         self.assertEqual(self.knight_g.position.row, 3)
         self.assertEqual(self.knight_g.position.col, 3)
         self.assertEqual(self.knight_g.item, None)
-        self.assertEqual(self.knight_g.status, KILLED)
+        self.assertEqual(self.knight_g.status, DEAD)
 
 
 if __name__ == '__main__':
